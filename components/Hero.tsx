@@ -1,5 +1,6 @@
-import { ArrowDown, Camera, Star } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Camera, ShieldCheck, Sparkles, Star } from "lucide-react";
 import HeroImage from "./HeroImage";
+import { GOOGLE_REVIEWS_URL } from "@/lib/data";
 import { PRESCRIPTION_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 
 export default function Hero() {
@@ -7,12 +8,12 @@ export default function Hero() {
     <section
       id="topo"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[90dvh] items-end overflow-hidden bg-paper md:min-h-[620px] md:items-center lg:min-h-[calc(100dvh-100px)]"
+      className="relative isolate flex min-h-[90dvh] items-end overflow-hidden bg-paper md:min-h-[640px] md:items-center lg:min-h-[calc(100dvh-100px)]"
     >
       <HeroImage
         src="/hero-desktop.jpg"
         alt="Cliente de blazer de linho usando armação de grau na ótica Mercadão dos Óculos Videira"
-        className="hidden object-cover object-right md:block"
+        className="hidden object-cover object-[85%_18%] md:block"
         fallbackClassName="hidden md:block"
       />
       <HeroImage
@@ -24,18 +25,18 @@ export default function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 left-0 hidden w-[78%] bg-gradient-to-r from-[#FAF9F6] via-[#FAF9F6]/80 to-transparent md:block"
+        className="absolute inset-y-0 left-0 hidden w-[82%] bg-gradient-to-r from-[#FAF9F6] from-35% via-[#FAF9F6]/90 via-58% to-transparent md:block"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[78%] bg-gradient-to-t from-[#FAF9F6] via-[#FAF9F6]/70 to-transparent md:hidden"
+        className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-[#FAF9F6] from-30% via-[#FAF9F6]/85 to-transparent md:hidden"
       />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-20 sm:px-6 md:py-16">
         <div className="max-w-xl">
           <p
             data-hero-item
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-stone-200/80 bg-white/80 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-ink backdrop-blur"
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-stone-200/90 bg-white/90 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-ink shadow-sm backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
             Rede de Óticas · Videira, SC
@@ -44,17 +45,17 @@ export default function Hero() {
           <h1
             id="hero-title"
             data-hero-item
-            className="font-display text-3xl font-medium leading-tight text-balance text-ink sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl font-medium leading-[1.12] text-balance text-ink sm:text-5xl lg:text-6xl"
           >
             Enxergue o mundo com clareza, estilo e o melhor custo-benefício de Videira.
           </h1>
 
           <p
             data-hero-item
-            className="mt-4 max-w-md text-base leading-relaxed text-pretty text-mute sm:text-lg"
+            className="mt-4 max-w-lg text-base leading-relaxed text-pretty text-ink/75 sm:text-lg"
           >
             Variedade de armações de alta durabilidade, óculos de grau e solares, e lentes
-            oftálmicas computadorizadas com atendimento humanizado e ajustes gratuitos.
+            oftálmicas computadorizadas com consultoria óptica humanizada e ajustes gratuitos.
           </p>
 
           <div data-hero-item className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -69,28 +70,57 @@ export default function Hero() {
               href={whatsappUrl(PRESCRIPTION_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/85 px-7 text-[15px] font-semibold text-ink backdrop-blur transition-colors hover:border-ink"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/90 px-7 text-[15px] font-semibold text-ink shadow-sm backdrop-blur transition-colors hover:border-ink hover:bg-white"
             >
-              <Camera className="h-4 w-4" aria-hidden="true" />
+              <Camera className="h-4 w-4 text-brand" aria-hidden="true" />
               Enviar Receita via WhatsApp
             </a>
           </div>
 
-          <p
+          <div
             data-hero-item
-            className="mt-6 flex items-center gap-2 text-sm text-ink/80"
+            className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink/85"
           >
-            <span className="flex items-center gap-0.5 text-amber-500" aria-hidden="true">
-              <Star className="h-4 w-4 fill-current" />
-            </span>
-            <span>
-              <strong className="font-semibold text-ink">5.0 no Google</strong> (Avaliações Reais de
-              Clientes em Videira)
-            </span>
-          </p>
+            <a
+              href="#depoimentos"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-200/90 bg-white/85 px-3.5 py-1.5 shadow-sm backdrop-blur transition-colors hover:border-stone-300 hover:bg-white"
+            >
+              <span className="flex items-center gap-0.5 text-amber-500" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                ))}
+              </span>
+              <span>
+                <strong className="font-semibold text-ink">5.0 no Google</strong> · Avaliações Reais
+              </span>
+            </a>
+
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-brand-deep underline-offset-4 hover:underline"
+            >
+              Ver avaliações no Google Maps
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+
+          <ul
+            data-hero-item
+            className="mt-6 grid grid-cols-2 gap-2.5 border-t border-stone-200/80 pt-5 text-xs text-ink/80 sm:flex sm:flex-wrap sm:gap-6"
+          >
+            <li className="flex items-center gap-1.5 font-medium">
+              <ShieldCheck className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+              Preços justos de fábrica
+            </li>
+            <li className="flex items-center gap-1.5 font-medium">
+              <Sparkles className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+              Ajuste e limpeza ultrassônica grátis
+            </li>
+          </ul>
         </div>
       </div>
     </section>
   );
 }
-

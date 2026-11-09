@@ -2,29 +2,58 @@ import Image from "next/image";
 
 type Props = {
   className?: string;
-  /** Altura em px; a largura segue a proporção ~1.9:1 do recorte da marca. */
-  size?: "sm" | "md";
+  variant?: "light" | "dark";
+  showUnit?: boolean;
 };
 
 /**
- * A marca oficial vem em um quadrado vermelho com muito respiro. Recortamos o
- * centro (proporção ~1.9:1) dentro de um selo arredondado com borda branca,
- * preservando a legibilidade da tipografia original.
+ * Marca oficial recortada em alta definição (/logo-sticker.png) combinada
+ * com a assinatura editorial da unidade de Videira - SC.
  */
-export default function Logo({ className = "", size = "md" }: Props) {
-  const dims = size === "sm" ? "h-10 w-[76px]" : "h-12 w-[92px]";
+export default function Logo({
+  className = "",
+  variant = "light",
+  showUnit = true,
+}: Props) {
+  const isDark = variant === "dark";
+
   return (
-    <span
-      className={`relative inline-block shrink-0 overflow-hidden rounded-2xl bg-[#E52427] ring-2 ring-white shadow-sm ${dims} ${className}`}
-    >
-      <Image
-        src="/logo.jpg"
-        alt="Mercadão dos Óculos - Rede de Óticas"
-        fill
-        sizes="96px"
-        className="scale-[1.12] object-cover"
-      />
+    <span className={`inline-flex items-center gap-3 ${className}`}>
+      <span
+        className={`relative inline-flex shrink-0 items-center justify-center rounded-2xl px-2.5 py-1 transition-transform duration-200 group-hover:scale-[1.02] ${
+          isDark
+            ? "bg-white/95 shadow-sm ring-1 ring-white/20"
+            : "bg-white shadow-[0_2px_10px_-2px_rgba(0,0,0,0.07)] ring-1 ring-stone-200/90"
+        }`}
+      >
+        <Image
+          src="/logo-sticker.png"
+          alt="Rede de Óticas Mercadão dos Óculos"
+          width={136}
+          height={77}
+          priority
+          className="h-9 w-auto object-contain sm:h-10"
+        />
+      </span>
+
+      {showUnit ? (
+        <span className="hidden flex-col border-l border-stone-200/90 pl-3 sm:flex">
+          <span
+            className={`font-display text-[15px] font-semibold leading-tight tracking-tight ${
+              isDark ? "text-white" : "text-ink"
+            }`}
+          >
+            Unidade Videira
+          </span>
+          <span
+            className={`mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] leading-none ${
+              isDark ? "text-white/65" : "text-mute"
+            }`}
+          >
+            Centro · Santa Catarina
+          </span>
+        </span>
+      ) : null}
     </span>
   );
 }
-

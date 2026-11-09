@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-ink pb-24 pt-14 text-white/80 md:pb-10">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.2fr]">
         <div>
-          <Logo />
+          <Logo variant="dark" showUnit={false} />
           <p className="mt-5 font-display text-2xl text-white">
             Mercadão dos Óculos
             <span className="block text-base text-white/70">Franquia Videira / SC</span>
@@ -118,4 +118,3 @@ export default function Footer() {
     </footer>
   );
 }
-

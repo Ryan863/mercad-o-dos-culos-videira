@@ -16,7 +16,8 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mercadao-oculos-videira.vercel.app";
 
 const TITLE =
   "Mercadão dos Óculos Videira | Armações, Lentes e Óculos de Sol no Centro";

@@ -21,10 +21,13 @@ export const STORE = {
 } as const;
 
 const MAPS_QUERY = encodeURIComponent(
-  "Rua XV de Novembro, 421, Centro, Videira, SC, 89560-128",
+  "Mercadão dos Óculos Rua XV de Novembro, 421, Centro, Videira, SC, 89560-128",
 );
 
 export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
+export const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  "Mercadão dos Óculos Videira Rua XV de Novembro 421",
+)}`;
 export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`;
 export const WAZE_URL = `https://waze.com/ul?q=${MAPS_QUERY}&navigate=yes`;
 
@@ -93,12 +96,12 @@ export const CATEGORIES: { id: Category | "todos"; label: string }[] = [
   { id: "clip-on", label: "Linha Clip-On" },
 ];
 
-export const SHAPES: { id: FaceShape; label: string }[] = [
-  { id: "quadrado", label: "Quadrado" },
-  { id: "redondo", label: "Redondo" },
-  { id: "oval", label: "Oval" },
-  { id: "aviador", label: "Aviador" },
-  { id: "gatinho", label: "Gatinho (Cat Eye)" },
+export const SHAPES: { id: FaceShape; label: string; shortLabel: string }[] = [
+  { id: "quadrado", label: "Quadrado", shortLabel: "Quadrado" },
+  { id: "redondo", label: "Redondo", shortLabel: "Redondo" },
+  { id: "oval", label: "Oval", shortLabel: "Oval" },
+  { id: "aviador", label: "Aviador", shortLabel: "Aviador" },
+  { id: "gatinho", label: "Gatinho (Cat Eye)", shortLabel: "Gatinho" },
 ];
 
 export type Tag = "Lançamento" | "Mais Vendido" | "Clip-on 2 em 1";
@@ -108,11 +111,15 @@ export type FrameColor = {
   hex: string;
   /** Segunda cor para efeito tartaruga / degradê. */
   hex2?: string;
+  /** Filtro sutil de matiz/brilho para pré-visualizar variação cromática na foto. */
+  imageFilter?: string;
 };
 
 export type Product = {
   id: string;
   name: string;
+  image: string;
+  specs: string;
   category: Category;
   shape: FaceShape;
   material: "Acetato Italiano" | "Titânio" | "Metal Leve" | "Acetato Flexível";
@@ -126,93 +133,155 @@ export type Product = {
   blurb: string;
 };
 
-const TARTARUGA: FrameColor = { name: "Tartaruga", hex: "#6B3F18", hex2: "#C58B3A" };
+const TARTARUGA: FrameColor = {
+  name: "Tartaruga",
+  hex: "#6B3F18",
+  hex2: "#C58B3A",
+};
 
 export const PRODUCTS: Product[] = [
   {
     id: "aurora",
     name: "Aurora",
+    image: "/products/aurora.jpg",
+    specs: "53□17 · 142mm",
     category: "grau-feminino",
     shape: "gatinho",
     material: "Acetato Italiano",
     tag: "Lançamento",
     colors: [
       TARTARUGA,
-      { name: "Vinho", hex: "#6B1F2E" },
-      { name: "Preto", hex: "#1B1B1D" },
+      {
+        name: "Vinho Imperial",
+        hex: "#6B1F2E",
+        imageFilter: "hue-rotate(-28deg) saturate(1.15) contrast(1.03)",
+      },
+      {
+        name: "Preto Obsidiana",
+        hex: "#1B1B1D",
+        imageFilter: "saturate(0.15) contrast(1.12) brightness(0.95)",
+      },
     ],
-    blurb: "Cantos elevados que alongam o olhar com leveza.",
+    blurb: "Cantos elevados em acetato tartaruga que valorizam e iluminam o olhar.",
   },
   {
     id: "lumen",
     name: "Lúmen",
+    image: "/products/lumen.jpg",
+    specs: "49□20 · 140mm",
     category: "grau-feminino",
     shape: "redondo",
     material: "Metal Leve",
     tag: "Mais Vendido",
     colors: [
-      { name: "Dourado", hex: "#C9A24B" },
-      { name: "Prata", hex: "#B3B8BF" },
-      { name: "Rosé", hex: "#C99A8B" },
+      { name: "Dourado Champagne", hex: "#C9A24B" },
+      {
+        name: "Prata Polido",
+        hex: "#B3B8BF",
+        imageFilter: "saturate(0.18) brightness(1.03) contrast(1.04)",
+      },
+      {
+        name: "Rosé Gold",
+        hex: "#C99A8B",
+        imageFilter: "hue-rotate(-18deg) saturate(1.18)",
+      },
     ],
-    blurb: "Aro fino e luminoso para o uso diário.",
+    blurb: "Aro fino com gravação botânica na ponte e leveza extrema para o uso diário.",
   },
   {
     id: "vitta",
     name: "Vitta",
+    image: "/products/vitta.jpg",
+    specs: "50□19 · 140mm",
     category: "grau-feminino",
     shape: "oval",
     material: "Acetato Italiano",
     colors: [
-      { name: "Nude", hex: "#D6B49B" },
-      { name: "Azul-petróleo", hex: "#1F4E5F" },
-      TARTARUGA,
+      { name: "Mel Translúcido", hex: "#D6B49B" },
+      {
+        name: "Âmbar Havana",
+        hex: "#8B5A2B",
+        imageFilter: " saturate(1.25) brightness(0.94) contrast(1.06)",
+      },
+      {
+        name: "Cristal Champagne",
+        hex: "#E5D8C8",
+        imageFilter: "saturate(0.55) brightness(1.05)",
+      },
     ],
-    blurb: "Oval suave, discreta e fácil de combinar.",
+    blurb: "Silhueta oval translúcida que suaviza os traços com elegância natural.",
   },
   {
     id: "sereno",
     name: "Sereno",
+    image: "/products/sereno.jpg",
+    specs: "54□18 · 145mm",
     category: "grau-masculino",
     shape: "quadrado",
     material: "Acetato Italiano",
     tag: "Mais Vendido",
     colors: [
-      { name: "Preto", hex: "#1B1B1D" },
-      { name: "Azul-marinho", hex: "#1E2B4A" },
-      { name: "Grafite", hex: "#4A4D52" },
+      { name: "Preto Piano", hex: "#1B1B1D" },
+      {
+        name: "Azul Noturno",
+        hex: "#1E2B4A",
+        imageFilter: "hue-rotate(190deg) saturate(1.4) brightness(1.03)",
+      },
+      {
+        name: "Grafite Fumê",
+        hex: "#4A4D52",
+        imageFilter: "brightness(1.08) contrast(0.94)",
+      },
     ],
-    blurb: "Clássico marcante, ideal para o dia a dia profissional.",
+    blurb: "Arquitetura clássica marcante com rebites prateados e encaixe anatômico.",
   },
   {
     id: "atlas",
     name: "Atlas",
+    image: "/products/atlas.jpg",
+    specs: "55□17 · 145mm",
     category: "grau-masculino",
     shape: "quadrado",
     material: "Titânio",
     tag: "Lançamento",
     colors: [
-      { name: "Grafite", hex: "#55595E" },
-      { name: "Prata", hex: "#B3B8BF" },
-      { name: "Dourado", hex: "#B8944A" },
+      { name: "Grafite Escovado", hex: "#55595E" },
+      {
+        name: "Prata Titânio",
+        hex: "#B3B8BF",
+        imageFilter: "brightness(1.06) contrast(1.02)",
+      },
+      {
+        name: "Dourado Fosco",
+        hex: "#B8944A",
+        imageFilter: "sepia(0.32) saturate(1.3)",
+      },
     ],
-    blurb: "Ultraleve e resistente, com acabamento fino.",
+    blurb: "Estrutura em titânio puro ultraleve: resistência superior sem pesar no rosto.",
   },
   {
     id: "marco",
     name: "Marco",
+    image: "/products/marco.jpg",
+    specs: "50□21 · 144mm",
     category: "grau-masculino",
     shape: "redondo",
     material: "Metal Leve",
     colors: [
-      { name: "Chumbo", hex: "#4F5358" },
-      { name: "Dourado", hex: "#C9A24B" },
+      { name: "Chumbo & Ouro", hex: "#4F5358", hex2: "#C9A24B" },
+      {
+        name: "Dourado Clássico",
+        hex: "#C9A24B",
+        imageFilter: "sepia(0.25) saturate(1.25)",
+      },
     ],
-    blurb: "Redondo intelectual com ponte confortável.",
+    blurb: "Design P3 intelectual com ponte trabalhada em tom dourado escovado.",
   },
   {
     id: "horizonte",
     name: "Horizonte",
+    image: "/products/horizonte.jpg",
+    specs: "58□14 · 140mm",
     category: "solar",
     shape: "aviador",
     material: "Metal Leve",
@@ -220,83 +289,131 @@ export const PRODUCTS: Product[] = [
     sun: true,
     lensTint: "#3C4A3A",
     colors: [
-      { name: "Dourado", hex: "#C9A24B" },
-      { name: "Prata", hex: "#B3B8BF" },
-      { name: "Preto", hex: "#26262A" },
+      { name: "Dourado · Lente G15", hex: "#C9A24B", hex2: "#3C4A3A" },
+      {
+        name: "Prata · Lente Grafite",
+        hex: "#B3B8BF",
+        imageFilter: "saturate(0.3) contrast(1.05)",
+      },
+      {
+        name: "Bronze · Lente Marrom",
+        hex: "#8A6236",
+        imageFilter: "hue-rotate(-22deg) saturate(1.15)",
+      },
     ],
-    blurb: "O aviador atemporal com proteção UV.",
+    blurb: "O aviador de ponte dupla com lentes solares polarizadas e proteção UV400.",
   },
   {
     id: "riviera",
     name: "Riviera",
+    image: "/products/riviera.jpg",
+    specs: "54□18 · 142mm",
     category: "solar",
     shape: "gatinho",
     material: "Acetato Italiano",
     tag: "Lançamento",
     sun: true,
     lensTint: "#4A3524",
-    colors: [TARTARUGA, { name: "Preto", hex: "#1B1B1D" }],
-    blurb: "Glamour de verão com lentes degradê.",
+    colors: [
+      { name: "Tartaruga · Degradê Marrom", hex: "#6B3F18", hex2: "#C58B3A" },
+      {
+        name: "Preto · Fumê Intenso",
+        hex: "#1B1B1D",
+        imageFilter: "saturate(0.18) contrast(1.1)",
+      },
+    ],
+    blurb: "Sofisticação europeia com lentes marrom degradê e proteção UV400 total.",
   },
   {
     id: "costa",
     name: "Costa",
+    image: "/products/costa.jpg",
+    specs: "54□19 · 145mm",
     category: "solar",
     shape: "quadrado",
     material: "Acetato Italiano",
     sun: true,
     lensTint: "#23262B",
     colors: [
-      { name: "Preto", hex: "#1B1B1D" },
-      TARTARUGA,
-      { name: "Azul-marinho", hex: "#1E2B4A" },
+      { name: "Preto · Polarizado", hex: "#1B1B1D" },
+      {
+        name: "Havana Escuro",
+        hex: "#5A381E",
+        imageFilter: "sepia(0.28) saturate(1.3)",
+      },
     ],
-    blurb: "Presença forte, conforto o dia todo.",
+    blurb: "Presença imponente com lentes polarizadas antirreflexo para dirigir com conforto.",
   },
   {
     id: "pipa",
-    name: "Pipa",
+    name: "Pipa Flex",
+    image: "/products/pipa.jpg",
+    specs: "45□16 · 130mm",
     category: "infantil",
     shape: "redondo",
     material: "Acetato Flexível",
     kids: true,
     colors: [
-      { name: "Azul", hex: "#2F6FD0" },
-      { name: "Rosa", hex: "#E2799B" },
-      { name: "Verde", hex: "#3FA26B" },
+      { name: "Azul Céu & Coral", hex: "#63A9E2", hex2: "#F06B6B" },
+      {
+        name: "Lilás & Rosa",
+        hex: "#9B7EDE",
+        imageFilter: "hue-rotate(48deg) saturate(1.1)",
+      },
+      {
+        name: "Verde Menta & Azul",
+        hex: "#3FA26B",
+        imageFilter: "hue-rotate(-45deg) saturate(1.05)",
+      },
     ],
-    blurb: "Flexível e resistente para brincar sem medo.",
+    blurb: "Material TR90 superflexível e antialérgico para brincar e estudar com segurança.",
   },
   {
     id: "tuca",
-    name: "Tuca",
+    name: "Tuca Explorer",
+    image: "/products/tuca.jpg",
+    specs: "46□16 · 132mm",
     category: "infantil",
     shape: "quadrado",
     material: "Acetato Flexível",
     tag: "Mais Vendido",
     kids: true,
     colors: [
-      { name: "Vermelho", hex: "#E52427" },
-      { name: "Azul-marinho", hex: "#1E2B4A" },
-      { name: "Roxo", hex: "#7A4FC0" },
+      { name: "Marinho & Vermelho", hex: "#1E2B4A", hex2: "#E52427" },
+      {
+        name: "Azul Royal & Laranja",
+        hex: "#2563EB",
+        imageFilter: "hue-rotate(18deg) saturate(1.2)",
+      },
     ],
-    blurb: "Divertida, leve e ajustável ao rosto pequeno.",
+    blurb: "Hastes emborrachadas anatômicas que abraçam o rosto infantil sem escorregar.",
   },
   {
     id: "duo-quadrado",
-    name: "Duo Quadrado",
+    name: "Duo Urbano 2 em 1",
+    image: "/products/duo-quadrado.jpg",
+    specs: "54□18 · 143mm",
     category: "clip-on",
     shape: "quadrado",
     material: "Acetato Italiano",
     tag: "Clip-on 2 em 1",
     clip: true,
     lensTint: "#1E2024",
-    colors: [{ name: "Preto", hex: "#1B1B1D" }, TARTARUGA],
-    blurb: "Armação de grau com clip solar magnético.",
+    colors: [
+      { name: "Preto Fosco + Clip Polarizado", hex: "#1B1B1D" },
+      {
+        name: "Grafite + Clip G15",
+        hex: "#4A4D52",
+        imageFilter: "brightness(1.06) contrast(0.95)",
+      },
+    ],
+    blurb: "Armação de grau com clip solar magnético polarizado: praticidade em um clique.",
   },
   {
     id: "duo-aviador",
-    name: "Duo Aviador",
+    name: "Duo Aviador 2 em 1",
+    image: "/products/duo-aviador.jpg",
+    specs: "56□16 · 142mm",
     category: "clip-on",
     shape: "aviador",
     material: "Metal Leve",
@@ -304,25 +421,14 @@ export const PRODUCTS: Product[] = [
     clip: true,
     lensTint: "#2A3A2E",
     colors: [
-      { name: "Dourado", hex: "#C9A24B" },
-      { name: "Prata", hex: "#B3B8BF" },
+      { name: "Dourado + Clip Verde G15", hex: "#C9A24B", hex2: "#2E4A36" },
+      {
+        name: "Prata + Clip Fumê",
+        hex: "#B3B8BF",
+        imageFilter: "saturate(0.25) contrast(1.05)",
+      },
     ],
-    blurb: "Dois óculos em um: grau e sol sem trocar de armação.",
-  },
-  {
-    id: "duo-redondo",
-    name: "Duo Redondo",
-    category: "clip-on",
-    shape: "redondo",
-    material: "Metal Leve",
-    tag: "Clip-on 2 em 1",
-    clip: true,
-    lensTint: "#2B2420",
-    colors: [
-      { name: "Dourado", hex: "#C9A24B" },
-      { name: "Chumbo", hex: "#4F5358" },
-    ],
-    blurb: "Estilo retrô com versatilidade total.",
+    blurb: "Dois óculos em um: elegância do metal no escritório e proteção solar na rua.",
   },
 ];
 
@@ -425,4 +531,3 @@ export const OTHER_REVIEWERS = [
 ];
 
 export const REVIEW_COUNT = REVIEWS.length + OTHER_REVIEWERS.length;
-

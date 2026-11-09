@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
+import Image from "next/image";
 import { Check, MessageCircle, ShoppingBag, Trash2, X } from "lucide-react";
 import Drawer from "./Drawer";
-import FrameArt from "./FrameArt";
 import { useCart } from "@/lib/cart";
 import { LENSES, PRODUCTS } from "@/lib/data";
 import { cartMessage, whatsappUrl } from "@/lib/whatsapp";
@@ -98,17 +98,16 @@ export default function CartDrawer() {
                 {resolved.map(({ product, color, colorIndex }) => (
                   <li
                     key={`${product.id}-${colorIndex}`}
-                    className="flex items-center gap-3 rounded-2xl border border-stone-200/70 bg-white/80 p-3"
+                    className="flex items-center gap-3 rounded-2xl border border-stone-200/70 bg-white/85 p-3"
                   >
-                    <div className="w-24 shrink-0 rounded-xl bg-paper-2 p-2">
-                      <FrameArt
-                        shape={product.shape}
-                        color={color}
-                        metal={product.material === "Metal Leve" || product.material === "Titânio"}
-                        sun={product.sun}
-                        clip={product.clip}
-                        kids={product.kids}
-                        lensTint={product.lensTint}
+                    <div className="relative h-16 w-22 shrink-0 overflow-hidden rounded-xl bg-[#F5F3EF]">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="96px"
+                        style={color.imageFilter ? { filter: color.imageFilter } : undefined}
+                        className="object-cover"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -166,4 +165,3 @@ export default function CartDrawer() {
     </Drawer>
   );
 }
-
