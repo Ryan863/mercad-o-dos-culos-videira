@@ -32,7 +32,7 @@ export default function Prescription() {
         className="absolute inset-0 -z-10 opacity-60 [background:radial-gradient(60%_50%_at_85%_20%,rgba(229,36,39,0.35),transparent),radial-gradient(40%_40%_at_10%_90%,rgba(56,189,248,0.18),transparent)]"
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-12 px-4 sm:px-8 lg:px-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div>
           <SectionHeading
             id="receita-title"

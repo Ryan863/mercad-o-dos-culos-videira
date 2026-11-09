@@ -51,7 +51,7 @@ export default function Location() {
       aria-labelledby="loja-title"
       className="scroll-mt-28 bg-paper py-16 sm:py-24"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-12">
         <SectionHeading
           id="loja-title"
           eyebrow="Visite a loja"

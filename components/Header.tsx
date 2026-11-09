@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       <div className="bg-ink text-[12px] text-white/85">
-        <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex min-h-9 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-8 lg:px-12">
           <p className="flex min-w-0 items-center gap-1.5">
             <MapPin className="h-3.5 w-3.5 shrink-0 text-brand" aria-hidden="true" />
             <span className="truncate">{STORE.addressLine}</span>
@@ -32,10 +32,10 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="border-b border-stone-200/70 bg-paper/85 backdrop-blur-xl">
+      <div className="border-b border-stone-200/70 bg-paper/90 backdrop-blur-xl">
         <nav
           aria-label="Principal"
-          className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6"
+          className="mx-auto flex h-18 max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12"
         >
           <a href="#topo" aria-label="Mercadão dos Óculos - início" className="shrink-0">
             <Logo />
@@ -54,12 +54,12 @@ export default function Header() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={openCart}
               aria-label={`Abrir sacola (${count} ${count === 1 ? "item" : "itens"})`}
-              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-200/80 bg-white text-ink shadow-sm transition-colors hover:border-stone-300"
+              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-200/90 bg-white text-ink shadow-sm transition-all hover:border-stone-300 hover:shadow"
             >
               <ShoppingBag className="h-5 w-5" aria-hidden="true" />
               {count > 0 ? (
@@ -73,7 +73,7 @@ export default function Header() {
               href={whatsappUrl(GENERAL_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden min-h-11 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-deep active:bg-brand-deep sm:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-[0_4px_14px_-2px_rgba(229,36,39,0.4)] transition-all hover:bg-brand-deep hover:shadow-[0_6px_20px_-2px_rgba(229,36,39,0.55)] active:bg-brand-deep sm:inline-flex"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Falar com Consultor
@@ -84,7 +84,7 @@ export default function Header() {
               onClick={() => setMenuOpen(true)}
               aria-label="Abrir menu"
               aria-haspopup="dialog"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-200/80 bg-white text-ink shadow-sm lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-200/90 bg-white text-ink shadow-sm lg:hidden"
             >
               <Menu className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -132,4 +132,3 @@ export default function Header() {
     </header>
   );
 }
-
