@@ -27,7 +27,7 @@ export default function Lenses() {
         <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-amber-100/70 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           id="lentes-title"
           eyebrow="Lentes & saúde visual"

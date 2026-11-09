@@ -7,7 +7,7 @@ import { GENERAL_MESSAGE, whatsappUrl } from "@/lib/whatsapp";
 export default function Footer() {
   return (
     <footer className="bg-ink pb-24 pt-14 text-white/80 md:pb-10">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 sm:px-8 lg:px-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.2fr]">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.2fr]">
         <div>
           <Logo variant="dark" showUnit={false} />
           <p className="mt-5 font-display text-2xl text-white">
@@ -108,7 +108,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-[1400px] border-t border-white/10 px-4 pt-6 text-xs text-white/50 sm:px-8 lg:px-12">
+      <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 px-4 pt-6 text-xs text-white/50 sm:px-6">
         <p>
           © {new Date().getFullYear()} Mercadão dos Óculos - Franquia Videira / SC · {STORE.portalDisplay}
         </p>
